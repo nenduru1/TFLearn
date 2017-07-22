@@ -32,8 +32,8 @@ data=preprocess(data,to_ignore)
 
 #data=samplewise_std_normalization(data)
 
-from sklearn.preprocessing import StandardScaler
-sc=StandardScaler()
+from sklearn.preprocessing import StandardScaler,MinMaxScaler
+sc=MinMaxScaler(feature_range=(0,1))
 data=sc.fit_transform(data)
 
 #build neural network
@@ -46,7 +46,7 @@ net=tflearn.regression(net)
 #define model
 model=tflearn.DNN(net)
 #start training
-model.fit(data,labels,n_epoch=50,batch_size=32,show_metric=True)
+model.fit(data,labels,n_epoch=100,batch_size=16,show_metric=True)
 
 #test
 dicaprio=[3,'Jack','male',19,0,0,'N/A',5.000]
